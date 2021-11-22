@@ -2,8 +2,8 @@ PImage farmyard;
 
 boolean gameOver = false;
 
- // Declare and initialize a variable (numberOfTurkeys) to store how many turkeys are in the race (2-8)
- int nt = 8;
+ // Declare and initialize a variable (numberOfTurkeys) to store how many turkeys are in the race (2-6)
+ int nt = 4;
  // Declare an array (turkeys) that is big enough to hold all the turkeys 
  Turkey[] turkeys = new Turkey[nt];
 
@@ -22,10 +22,12 @@ void setup() {
   farmyard.resize(width, height);
  
   // Create the turkeys and put them in the array. 
-  // Example:     turkeys[0] = new Turkey(0, y-value);
+  // Example:     turkeys[0] = new Turkey(0, yValue);
   // NOTE: Each turkey will need a unique y value to place it in a different racing lane
+  int laneWidth = height / turkeys.length;
+  
   for( int i = 0; i < turkeys.length; i++ ){
-    turkeys[i] = new Turkey(0, 100 + (50*i), "dinnerRolls.png");
+    turkeys[i] = new Turkey(0, (laneWidth * i), "dinnerRolls.png");
   }
 }
 
@@ -35,14 +37,20 @@ void draw() {
   
   if (!gameOver) {
  
+    drawFinishLine();    // This method draws the checkered finish line
     drawLaneMarkers();   // This method draws the lines between each racing lane
     drawTurkeys();       // This method draws each turkey
     moveTurkeys();       // This method moves the turkeys during the race 
     checkForWinner();    // This method checks to see if any of the turkeys have crossed the finishing line
 
-    // See if you can figure out how to change the speed of the turkeys by changing the Turkey class. 
-
-    // Option: Draw the turkeys so they fill the racing lanes (fewer turkeys mean bigger size)
+    // OPTIONAL: Change the turkey images to other popular Thanksgiving items!
+    // cranberrySauce.png
+    // dinnerRolls.png
+    // gravy.png
+    // greenBeanCasserole.png
+    // mashedPotatoes.png
+    // stuffing.png
+    // Example: Turkey(x, y, "dinnerRolls.png");
 
   }
 
@@ -51,7 +59,7 @@ void draw() {
   if( gameOver ) {
     textSize(50);
     text ("RACE OVER", width/4, height/2);
-    drawConfetti();
+    dropConfetti();
   }
 }
 
@@ -84,7 +92,38 @@ void checkForWinner() {
 void drawLaneMarkers() {
    // Put code here to draw lines to show the lanes of the racing course
    // Add text in each lane to show which turkey # is racing in it
+   int laneHeight = 4;
+   int laneWidth = (height / turkeys.length) - (laneHeight/2);
+   
+   for( int i = 0; i < turkeys.length; i++ ){
+     fill(0);
+     rect(0, i * laneWidth, width, laneHeight);
+   }
 }
+
+void drawFinishLine(){
+  int squareLength = 20;
+  int numSquares = height / squareLength;
+  
+  for( int i = 0; i < 2; i++ ){
+    for( int k = 0; k < numSquares; k++ ){
+      if( ((k+i) % 2) == 0 ) {
+        fill(0);
+      } else {
+        fill(255);
+      }
+      
+      int x = width - squareLength - (i * squareLength);
+      int y = k * squareLength;
+      
+      rect(x, y, squareLength, squareLength);
+    }
+  }
+}
+
+// ====================== DO NOT EDIT THE CODE BELOW ======================
+
+color[] savedPixels;
 
 class Confetti {
   int x;
@@ -121,4 +160,22 @@ public void drawConfetti() {
       confettis.remove(i);
     }
   }
+}
+
+void dropConfetti() {
+  if ( savedPixels == null ) {
+    savedPixels = new color[width * height];
+
+    loadPixels();
+    for (int i = 0; i < savedPixels.length; i++) {
+      savedPixels[i] = pixels[i];
+    }
+  }
+
+  for (int i = 0; i < savedPixels.length; i++) {
+    pixels[i] = savedPixels[i];
+  }
+  updatePixels();
+
+  drawConfetti();
 }

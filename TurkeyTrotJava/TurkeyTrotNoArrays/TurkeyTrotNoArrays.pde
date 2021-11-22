@@ -57,8 +57,7 @@ void draw() {
     fill(0);
     textSize(50);
     text("RACE OVER", width/4, height/2);
-
-    confetti();
+    dropConfetti();
   }
 }
 
@@ -126,7 +125,7 @@ public void drawConfetti() {
   }
 }
 
-void confetti() {
+void dropConfetti() {
   if ( savedPixels == null ) {
     savedPixels = new color[width * height];
 
