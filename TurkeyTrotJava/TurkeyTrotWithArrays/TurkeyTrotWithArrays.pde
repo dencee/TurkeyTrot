@@ -1,39 +1,36 @@
 PImage farmyard;
-
 boolean gameOver = false;
 
- // Declare and initialize a variable (numberOfTurkeys) to store how many turkeys are in the race (2-6)
- int nt = 4;
- // Declare an array (turkeys) that is big enough to hold all the turkeys 
- Turkey[] turkeys = new Turkey[nt];
+ // Declare and initialize a variable (numberOfTurkeys) to store
+ // how many turkeys are in the race (2-6)
+ 
+ // Declare an array (turkeys) that is big enough to
+ // hold all the turkeys 
 
 void setup() {
   // This sets the size of the text used for the lane labels.
   textSize(20);
   
-  // Set the size of the race course (make the width bigger for a longer race).
-  size(800,600);
+  // Set the size of the race course.
+  // Make the width bigger for a longer race.
+
  
-  // Use the loadImage method to ;oad a picture into the farmyard to be used as
-  // the race background (grass.jpg has been provided for you)
-  farmyard = loadImage("grass.jpg");
+  // Use the loadImage method to load grass.jpg into the
+  // farmyard variable
+
 
   // Resize the farmyard so it will fill the sketch
-  farmyard.resize(width, height);
+
  
   // Create the turkeys and put them in the array. 
   // Example:     turkeys[0] = new Turkey(0, yValue);
-  // NOTE: Each turkey will need a unique y value to place it in a different racing lane
-  int laneWidth = height / turkeys.length;
-  
-  for( int i = 0; i < turkeys.length; i++ ){
-    turkeys[i] = new Turkey(0, (laneWidth * i), "dinnerRolls.png");
-  }
+  //
+  // NOTE: Each turkey will need a unique y value to place it
+  //       in a different racing lane
 }
 
 void draw() {
   // Draw the background (farmyard)
-  background(farmyard);
   
   if (!gameOver) {
  
@@ -65,40 +62,23 @@ void draw() {
 
 void drawTurkeys() {
   //  Put code in here to tell each turkey to draw itself
-  for( Turkey t : turkeys ){
-    t.draw(); 
-  }
 }
 void moveTurkeys() {
   //  Put code in here to tell each turkey to move itself
-  for( Turkey t : turkeys ){
-    t.move(); 
-  }
 }
 
 void checkForWinner() {
-  //  Put code in here to check each turkey's x location to see if it crossed the finish line
-  //  If a turkey has crossed the line, set     gameOver = true; 
-  //  Also write the text "WINNER" in the winning turkey's race lane, so you can see who won.
-  //  NOTE: There might be a tie!
-  for(Turkey t : turkeys){
-    if( t.x > width - 50){
-      gameOver = true;
-      break;
-    }
-  }
+  // Put code in here to check each turkey's x location to
+  // see if it crossed the finish line
+  // If a turkey has crossed the line, set gameOver = true; 
+  //  
+  // Also write the text "WINNER" in the winning turkey's race lane,
+  // so you can see who won. NOTE: There might be a tie!
 }
 
 void drawLaneMarkers() {
    // Put code here to draw lines to show the lanes of the racing course
    // Add text in each lane to show which turkey # is racing in it
-   int laneHeight = 4;
-   int laneWidth = (height / turkeys.length) - (laneHeight/2);
-   
-   for( int i = 0; i < turkeys.length; i++ ){
-     fill(0);
-     rect(0, i * laneWidth, width, laneHeight);
-   }
 }
 
 void drawFinishLine(){
