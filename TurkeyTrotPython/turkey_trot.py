@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
     # 6. Create and set a variable to hold the number of Turkeys you want
     # in the race from 2 to 7 (7 is recommended)
-    num_turkeys = 7
+    num_turkeys = 2
 
     # 7. Call the draw_lane_markers function and pass in the number of turkeys
     draw_lane_markers(num_turkeys)
@@ -90,12 +90,9 @@ if __name__ == '__main__':
     #
     # *HINT* each turkey will have a different starting y location where each turkey
     # is (1 * lane_width) apart from each turkey
-    imgs = ['turkey.gif', 'dinnerRolls.gif', 'cranberrySauce.gif', 'gravy.gif', 'greenBeanCasserole.gif', 'mashedPotatoes.gif' , 'stuffing.gif']
-    turkeys = list()
-    for i in range(num_turkeys):
-        print(imgs[i])
-        t = Turkey(start_x, start_y + (i * lane_width), 'turkey.gif', '')
-        turkeys.append(t)
+
+    gobbler = Turkey(start_x, start_y, 'turkey.gif', 'Gobbler')
+    gobbler2 = Turkey(start_x, start_y - (1 * lane_width), 'turkey.gif', 'Gobbler2')
 
     # 12. Set the race in progress to True
     race_in_progress = True
@@ -104,13 +101,8 @@ if __name__ == '__main__':
         pass
 
         # 13. Call the trot() method for each one of your turkeys!
-        for turkey in turkeys:
-            turkey.trot()
-
-            if turkey.check_finish():
-                turkey.winner()
-                race_in_progress = False
-                break
+        gobbler.trot()
+        gobbler2.trot()
 
         # 14. For each turkey, use an 'if' statement and call your turkey's
         # check_finish() method
