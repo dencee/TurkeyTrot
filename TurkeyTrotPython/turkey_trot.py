@@ -46,36 +46,34 @@ if __name__ == '__main__':
     HEIGHT = 600
 
     # 1. Set the window variable to turtle.Screen()
-    window = turtle.Screen()
+    window = None
 
     # 2. Call the window's setup() method with the WIDTH and HEIGHT variables
-    window.setup(WIDTH, HEIGHT)
+
 
     # 3. Call the set_background() method with 'grass.png'
-    set_background('grass.png')
 
     # 4. Run your code. You should see a window with an image of grass
 
     # 5. Set the Turkey.window variable to the window variable created in step 1
-    Turkey.window = window
+
 
     # 6. Create and set a variable to hold the number of Turkeys you want
     # in the race from 2 to 7 (7 is recommended)
-    num_turkeys = 2
+
 
     # 7. Call the draw_lane_markers function and pass in the number of turkeys
-    draw_lane_markers(num_turkeys)
+
 
     # 8. Create and set a variable to hold the width of each lane
     # *HINT* the lane width is the HEIGHT of the window divided by the number of
     #        turkeys in the race
-    lane_width = HEIGHT / num_turkeys
+
 
     # 9. Create a variable called start_x and set it to -(WIDTH / 2)
-    start_x = -(WIDTH/2)
 
     # 10. Create a variable called start_y and set it to (HEIGHT / 2)
-    start_y = (HEIGHT/2)
+
 
     # 11. Create your turkey competitors!
     # gobbler = Turkey(start_x, start_y, 'turkey.gif', 'Gobbler')
@@ -91,18 +89,13 @@ if __name__ == '__main__':
     # *HINT* each turkey will have a different starting y location where each turkey
     # is (1 * lane_width) apart from each turkey
 
-    gobbler = Turkey(start_x, start_y, 'turkey.gif', 'Gobbler')
-    gobbler2 = Turkey(start_x, start_y - (1 * lane_width), 'turkey.gif', 'Gobbler2')
-
     # 12. Set the race in progress to True
-    race_in_progress = True
+    race_in_progress = False
 
     while race_in_progress:
         pass
 
         # 13. Call the trot() method for each one of your turkeys!
-        gobbler.trot()
-        gobbler2.trot()
 
         # 14. For each turkey, use an 'if' statement and call your turkey's
         # check_finish() method
